@@ -1,4 +1,4 @@
-# docker-compose.yml
+# docker-compose.yml - FIXED VERSION
 services:
   db:
     image: postgres:15-alpine
@@ -20,7 +20,6 @@ services:
     build: .
     command: >
       sh -c "python manage.py migrate &&
-             python manage.py createsuperuser_if_not_exists --username admin --password 12345678 &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
