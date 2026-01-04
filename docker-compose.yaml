@@ -17,6 +17,7 @@ services:
    
   web:
     build: .
+    user: "33:33"
     command: >
       sh -c "python manage.py migrate &&
              python manage.py collectstatic --noinput &&
