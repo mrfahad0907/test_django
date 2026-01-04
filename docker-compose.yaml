@@ -1,9 +1,8 @@
-# docker-compose.yml - FIXED VERSION
 services:
   db:
     image: postgres:15-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - test_django_postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
@@ -15,7 +14,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
+   
   web:
     build: .
     command: >
@@ -24,8 +23,8 @@ services:
              exec gunicorn core.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - .:/app
-      - static_volume:/app/static
-      - media_volume:/app/media
+      - test_django_static_volume:/app/static
+      - test_django_media_volume:/app/media
     environment:
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
@@ -38,9 +37,9 @@ services:
         condition: service_healthy
     restart: unless-stopped
     ports:
-    - "8000:8000"
+      - "8000:8000"
 
 volumes:
-  postgres_data:
-  static_volume:
-  media_volume:
+  test_django_postgres_data:
+  test_django_static_volume:
+  test_django_media_volume:
