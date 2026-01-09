@@ -37,6 +37,17 @@ EMAIL_PORT = 1025
 # http://whitenoise.evans.io/en/latest/django.html#using-whitenoise-in-development
 INSTALLED_APPS = ["whitenoise.runserver_nostatic", *INSTALLED_APPS]
 
+# STORAGES (WhiteNoise for static files)
+# ------------------------------------------------------------------------------
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

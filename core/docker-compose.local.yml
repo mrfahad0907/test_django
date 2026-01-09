@@ -2,6 +2,7 @@ volumes:
   core_local_postgres_data: {}
   core_local_postgres_data_backups: {}
   core_local_redis_data: {}
+  core_local_static: {}
 
 services:
   django: &django
@@ -16,6 +17,7 @@ services:
       - mailpit
     volumes:
       - .:/app:z
+      - core_local_static:/app/staticfiles
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
