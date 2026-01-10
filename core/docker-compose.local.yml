@@ -3,6 +3,7 @@ volumes:
   core_local_postgres_data_backups: {}
   core_local_redis_data: {}
   core_local_static: {}
+  core_local_media: {}
 
 services:
   django: &django
@@ -18,6 +19,7 @@ services:
     volumes:
       - .:/app:z
       - core_local_static:/app/staticfiles
+      - core_local_media:/app/core/media
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
