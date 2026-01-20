@@ -1,6 +1,4 @@
 volumes:
-  core_local_postgres_data: {}
-  core_local_postgres_data_backups: {}
   core_local_static: {}
   core_local_media: {}
 
@@ -11,8 +9,6 @@ services:
       dockerfile: ./compose/local/django/Dockerfile
     image: core_local_django
     container_name: core_local_django
-    depends_on:
-      - postgres
     volumes:
       - .:/app:z
       - core_local_static:/app/staticfiles
@@ -23,15 +19,3 @@ services:
     ports:
       - '8000:8000'
     command: /start
-
-  postgres:
-    build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: core_production_postgres
-    container_name: core_local_postgres
-    volumes:
-      - core_local_postgres_data:/var/lib/postgresql/data
-      - core_local_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/.local/.postgres

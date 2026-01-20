@@ -1,7 +1,12 @@
 # PostgreSQL
 # ------------------------------------------------------------------------------
-POSTGRES_HOST=postgres
+# For local docker-compose.local.yml (Django connects to remote DB)
+POSTGRES_HOST=<DB_SERVER_IP>
 POSTGRES_PORT=5432
 POSTGRES_DB=core
 POSTGRES_USER=debug
 POSTGRES_PASSWORD=debug
+
+# For remote docker-compose.postgres.yml (Database server)
+# Update POSTGRES_HOST with your database server IP address
+# Example: POSTGRES_HOST=192.168.1.100

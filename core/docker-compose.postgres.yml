@@ -1,0 +1,18 @@
+volumes:
+  postgres_data: {}
+  postgres_data_backups: {}
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: core_postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_backups:/backups
+    environment:
+      - POSTGRES_DB=core
+      - POSTGRES_USER=debug
+      - POSTGRES_PASSWORD=debug
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
